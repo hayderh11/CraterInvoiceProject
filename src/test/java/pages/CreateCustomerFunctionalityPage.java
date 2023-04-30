@@ -40,10 +40,10 @@ public class CreateCustomerFunctionalityPage {
 	@FindBy (xpath = "//th[text()='Phone ']")
 		public WebElement phoneColumnText; 
 	
-	@FindBy (xpath = "//th[text()='Phone ']")
+	@FindBy (xpath = "//th[text()='Amount Due ']")
 		public WebElement amountDueColumnText; 
 	
-	@FindBy (xpath = "//th[text()='Phone ']")
+	@FindBy (xpath = "//th[text()='Added On ']")
 		public WebElement addedOnColumnText; 
 	
 	@FindBy (xpath = "//button[contains(@id, 'headlessui-menu-button-5')]")
