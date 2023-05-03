@@ -73,5 +73,104 @@ public class CreateCustomerFunctionalityPage {
 	@FindBy (xpath = "//a[text()= '3']")
 		public WebElement pageNum3;
 	
+	@FindBy (xpath = "(//input[@name = 'name'])[1]")
+		public WebElement basicInfoName; 
+	
+	@FindBy (xpath = "(//input[contains(@type, 'text')])[3]")
+		public WebElement primaryContactName; 
+	
+	@FindBy (xpath = "(//input[contains(@type, 'text')])[4]")
+		public WebElement basicInfoEmail; 
+	
+	@FindBy (xpath = "(//input[contains(@type, 'text')])[5]")
+		public WebElement phoneField; 
+	
+	@FindBy (xpath = "(//input[contains(@type, 'text')])[6]")
+		public WebElement primaryCurrency; 
+	
+	@FindBy (xpath = "(//input[contains(@class, 'font-base block w-full')])[6]")
+	public WebElement websiteField;
+	
+	@FindBy (xpath = "(//input[contains(@type, 'text')])[7]")
+	public WebElement prefixField;
+	
+	@FindBy (xpath = "//button[@role= 'switch']")
+		public WebElement portalAccess; 
+	
+	@FindBy (xpath = "//input[@type= 'password']")
+		public WebElement pAPassword; 
+	
+	@FindBy (xpath = "//input[@name= 'confirm_password']")
+		public WebElement confirmPassword; 
+	
+	@FindBy (xpath = "(//input[@name= 'address_name'])[1]")
+		public WebElement billingName; 
+	
+	@FindBy (xpath = "(//input[@type= 'text'])[9]")
+		public WebElement billingCountry; 
+	
+	@FindBy (xpath = "//input[@name= 'billing.state']")
+		public WebElement billingState; 
+	
+	@FindBy (xpath = "//input[@name= 'billing.city']")
+		public WebElement billingCity; 	
+	
+	@FindBy (xpath = "//textarea[@name= 'billing_street1']")
+		public WebElement billingAddress;
+	
+	@FindBy (xpath = "(//input[@name= 'phone'])[2]")
+		public WebElement billingPhone;
+	
+	@FindBy (xpath = "(//input[@name= 'zip'])[1]")
+		public WebElement billingZipCode;
+	
+	@FindBy (xpath = "//button[text()= ' Copy from Billing']")
+		public WebElement copyFromBilling; 
+	
+	@FindBy (xpath = "//button[text()=' Save Customer']")
+		public WebElement saveCustomer; 
+	
+	@FindBy (xpath = "//p[text()='//p[text()='Success!']")
+		public WebElement successMessage; 
+	
+	@FindBy (xpath = "//p[text()='Customer created successfully']")
+		public WebElement customerCreatedMessage; 
+	
+	//@FindBy (xpath = "(//*[contains(concat(' ', normalize-space(@class), ' '), ' inline-flex ')])[1]")
+	@FindBy (xpath = "//*[@class='text-gray-400 focus:text-gray-500 inline-flex w-5 h-5 transition duration-150 ease-in-out focus:outline-none']")
+		public WebElement xButton; 
+	
+	@FindBy (xpath = "//h6[text()=' Sales & Expenses']")
+		public WebElement salesAndExpensesPage; 
+	
+	@FindBy (xpath = "//p[text()='Ronald Araujo Barcelona ']")
+		public WebElement displayedName;
+	
+	@FindBy (xpath = "//p[text()='Ronald Araujo ']")
+		public WebElement diplayedPrimaryContactName; 
+	
+	@FindBy (xpath = "//p[text()='ronald.ara@bracelona.com ']")
+		public WebElement diplayedEmail; 
+	
+	@FindBy (xpath = "//p[text()='EUR (€) ']")
+		public WebElement displayedCurrency; 
+	
+	@FindBy (xpath = "//p[text()='7038924705 ']")
+		public WebElement displayedPhoneNumber; 
+	
+	@FindBy (xpath = "//p[text()='http://www.barcelona.com ']")
+		public WebElement displayedWebsite; 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 
