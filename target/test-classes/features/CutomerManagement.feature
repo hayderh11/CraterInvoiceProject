@@ -1,23 +1,5 @@
-#Author: your.email@your.domain.com
-#Keywords Summary :
-#Feature: List of scenarios.
-#Scenario: Business rule through list of steps with arguments.
-#Given: Some precondition step
-#When: Some key actions
-#Then: To observe outcomes or validation
-#And,But: To enumerate more Given,When,Then steps
-#Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
-#Examples: Container for s table
-#Background: List of steps run before each of the scenarios
-#""" (Doc Strings)
-#| (Data Tables)
-#@ (Tags/Labels):To group Scenarios
-#<> (placeholder)
-#""
-## (Comments)
-#Sample Feature Definition Template
 
-@cutomersTest
+@cutomersTest @regression
 Feature: Create Customer Functionality for Invoice Application
   
   Background: 
@@ -26,7 +8,7 @@ Feature: Create Customer Functionality for Invoice Application
 		
   
 
-  @verifyCustomer
+  @verifyCustomerUI @smokeTest
   Scenario: Verify Customers Page UI components
     When I am on the 'Customers' page
     Then I should see the menu navigation path as "Home / Customers" placed under "Customers".
@@ -39,26 +21,56 @@ Feature: Create Customer Functionality for Invoice Application
 		And the left arrow should be disabled if the user is on the first page
 		And the right arrow should be disabled if the user is on the last page.	
 			
-			
-			
-			
-#Login into the Crater application.
-#Click on 'Customers' menu link.
-#I should be navigated to Page titled 'Customers'. 
-#I should see the menu navigation path as "Home / customers" placed under "Customers".
-#Button 1- I should see a secondary button titled "Filter" with a filter icon. 
-#Button 2 - I should see a primary button titled "+ New Customer".
-#I should see a table with the following columns:
-#|Select All checkbox.| NAME.| PHONE.| AMOUNT DUE.| ADDED ON.| 
-#I should see a link icon showing three dots with the following options:
-#Option 1: Edit with an edit icon.
-#Option 2: View with a view icon.
-#Option 3: Delete with a delete icon.
-#I should see Pagination text as follows: ‘Showing 1 to 10 of <Total customers> ‘results’.
-#I should be able to see Pagination navigation with the following controls:
-#Left arrow allowing the user navigate to previous pages.
-#Right arrow allowing the user to navigate to the next pages.
-#Number indicating the page the user is currently on and the next upcoming page.
-#Left arrow is disabled if the user is on the first page.
-#Right arrow is disabled if the user is on the last page.
-
+		@addNewCustomer
+		Scenario: Verify Add New Customer - Successful
+		Given I am on the Customers page
+    When I click on "+ New Customer"
+  	And I enter the following details for Basic Info:
+    | Display Name      | Ronald Araujo Barcelona     |
+  	| Primary Contact   | Ronald Araujo               |
+    | Email             | ronald.ara@bracelona.com    |
+    | Phone             | 7038924705                  |
+    | Currency          | EUR - Euro                  |
+    | Website           | www.barcelona.com           |
+    | Prefix            | MR                          |
+ 	  And I enter the following details for Portal Access:
+    | Password          | RonaldAraujo                 |
+    | Confirm Password  | RonaldAraujo                 |
+ 	  And I enter the following details for Billing Address:
+    | Name              | Ronald Araujo      |
+    | Country           | Spain              |
+    | State             | Catalonia          |
+    | City              | Barcelona          |
+    | Address           | 275 Camp Nou St    |
+    | Phone             | 7038924705         |
+    | Zip Code          | 27325              |
+  	And I enter the following details for Shipping Address:
+    | Name              | Ronald Araujo      |
+    | Country           | Spain              |
+    | State             | Catalonia          |
+    | City              | Barcelona          |
+    | Address           | 275 Camp Nou St    |
+    | Phone             | 7038924705         |
+    | Zip Code          | 27325              |
+  	
+  	Then I should not see any validation errors
+  	And I click on the 'Save Customer' button
+  	And I should see the flash message "Success! Customer created successfully" with a close button
+ 	  And the flash message should disappear within 5 seconds or less
+  	When I click on the 'X' button to close the flash message
+  	Then I should be on the Sales and expenses page
+  	And I should see the following customer details:
+    | Section           | Value               |
+    | Basic Info        | John Smith Company  |
+    | Display Name      | John Smith          |
+    | Primary Contact   | john@example.com    |
+    | Email             | 1234567890          |
+    | Currency          | USD                 |
+    | Website           | www.example.com     |
+  	And the customer information for the following sections should be saved in the application database:
+    | Basic Info        |
+    | Portal Access     |
+    | Billing Address   |
+    | Shipping Address  |
+    
+    
