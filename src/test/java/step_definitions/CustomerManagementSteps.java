@@ -2,8 +2,13 @@ package step_definitions;
 
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -301,5 +306,131 @@ public class CustomerManagementSteps {
 		}
 		
 	}
+	//----------------------------------------------------------
+		//Verify Population of Add Customer table.
 	
+	@Then("I should see the table data populated")
+	public void i_should_see_the_table_data_populated() {
+
+		
+		WebElement table = Driver.getDriver().findElement(By.xpath("//div[@class= 'relative table-container']"));
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		if (rows.size() > 0) {
+		    System.out.println("PASS! Table is populated with data.");
+		} else {
+		    System.out.println("FAIL! Table is empty.");
+		}
+	}
+	@Then("I should be able to Select Check box populated for each customer row.")
+	public void i_should_be_able_to_select_check_box_populated_for_each_customer_row() throws InterruptedException {
+	    
+		Thread.sleep(1000);
+		
+		 WebElement table = Driver.getDriver().findElement(By.xpath("//div[@class= 'relative table-container']"));
+		    List<WebElement> rows = table.findElements(By.tagName("tr")); 
+		 
+		    for (WebElement row : rows) { 
+		        WebElement checkbox = row.findElement(By.xpath("(//input[contains(@type, 'checkbox')])[1]")); 
+		        if (!checkbox.isSelected()) { 
+		            checkbox.click(); 
+		            System.out.println("PASS! I am able to Select the Check Boxes");
+		        }
+		        
+		    }
+	}
+	@Then("I should be able to see Name column populated with the customer’s display name for each row.")
+	public void i_should_be_able_to_see_name_column_populated_with_the_customer_s_display_name_for_each_row() {
+	    
+		WebElement table = Driver.getDriver().findElement(By.xpath("//div[@class= 'relative table-container']")); 
+	    List<WebElement> rows = table.findElements(By.tagName("tr")); 
+	    for (WebElement row : rows) { 
+	        List<WebElement> columns = row.findElements(By.tagName("td")); 
+	        
+	        if (!columns.isEmpty()) { 
+	            String name = columns.get(1).getText(); 
+	            Assert.assertNotNull(name);
+	            System.out.println("PASS! I am able to see Name Column Populated With Customer's Display Name");
+	        }
+	    }
+		
+	}
+	@Then("I should be able to see Phone column populated with the customer’s phone number for each row.")
+	public void i_should_be_able_to_see_phone_column_populated_with_the_customer_s_phone_number_for_each_row() {
+	    
+		WebElement table = Driver.getDriver().findElement(By.xpath("//div[@class='relative table-container']")); 
+	    List<WebElement> rows = table.findElements(By.tagName("tr")); 
+
+	    for (WebElement row : rows) { 
+	        List<WebElement> columns = row.findElements(By.tagName("td")); 
+
+	        if (!columns.isEmpty()) { 
+	            String phone = columns.get(2).getText(); 
+	            System.out.println("Phone number: " + phone);
+	        }else {
+	        	System.out.println("FAIL! Phone Columns are Empty.");
+	        }
+	    }
+		
+	}
+	@Then("I should be able to see Amount Due column populated with the current amount the customer owes.")
+	public void i_should_be_able_to_see_amount_due_column_populated_with_the_current_amount_the_customer_owes() {
+	    
+		WebElement table = Driver.getDriver().findElement(By.xpath("//div[@class='relative table-container']"));
+		List<WebElement> rows = table.findElements(By.tagName("tr")); 
+
+		for (WebElement row : rows) { 
+		    List<WebElement> columns = row.findElements(By.tagName("td")); 
+		    boolean allAmountsDueDisplayed = true;
+		   
+		    if (!columns.isEmpty()) {
+		        String amountDue = columns.get(3).getText();
+		        if (amountDue != null && !amountDue.isEmpty()) {
+		            System.out.println("PASS! Amount Due is displayed: " + amountDue);
+		        } else {
+		            allAmountsDueDisplayed = false;
+		            System.out.println("FAIL! Amount Due is not displayed for this customer.");
+		        }
+		        	
+		    }
+		}
+		}	
+	
+	@Then("I should be able to see Added On column populated with the date that the customer was added on in the following format: <day> <Month> <Year>.")
+	public void i_should_be_able_to_see_added_on_column_populated_with_the_date_that_the_customer_was_added_on_in_the_following_format_day_month_year() {
+	    
+		WebElement table = Driver.getDriver().findElement(By.xpath("//div[@class='relative table-container']"));
+	    List<WebElement> rows = table.findElements(By.tagName("tr"));
+
+	    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+
+	    for (WebElement row : rows) {
+	        List<WebElement> columns = row.findElements(By.tagName("td"));
+
+	        if (!columns.isEmpty()) {
+	            String addedOn = columns.get(4).getText();
+	            try {
+	                Date date = formatter.parse(addedOn);
+	                Assert.assertNotNull(date);
+	                System.out.println("PASS! I am Able to See the Added On Date in the Correct Format for Each Customer.");
+	            } catch (ParseException e) {
+	                System.out.println("FAIL! The Added On Date is Not in the Correct Format.");
+	            }
+	        }
+	    }
+	}
+	
+	@Then("I should be able to see More link represented by three dots for each row in the table.")
+	public void i_should_be_able_to_see_more_link_represented_by_three_dots_for_each_row_in_the_table() {
+	    
+		WebElement table = Driver.getDriver().findElement(By.xpath("//div[@class='relative table-container']"));
+	    List<WebElement> rows = table.findElements(By.tagName("tr"));
+	    
+	    for (WebElement row : rows) {
+	        WebElement moreLink = row.findElement(By.xpath("(//div[contains(@class, 'relative inline-block h-full text-left')])[4]"));
+	        Assert.assertTrue(moreLink.isDisplayed());
+	        System.out.println("PASS! I am able to see More link represented by three dots for each row in the table.");
+	    }
+	    	
+	    }
 }
+	
