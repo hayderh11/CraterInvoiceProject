@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -70,7 +72,7 @@ public class CreateCustomerFunctionalityPage {
 	@FindBy (xpath = "//span[text()= 'Next']")
 		public WebElement rightArrow; 
 	
-	@FindBy (xpath = "//a[text()= '3']")
+	@FindBy (xpath = "//a[text()= '4']")
 		public WebElement pageNum3;
 	
 	@FindBy (xpath = "(//input[@name = 'name'])[1]")
@@ -156,16 +158,16 @@ public class CreateCustomerFunctionalityPage {
 		public WebElement displayedCurrency; 
 	
 	@FindBy (xpath = "//p[text()='7038924705 ']")
-		public WebElement displayedPhoneNumber; 
+		public WebElement displayedPhoneNumber;
 	
 	@FindBy (xpath = "//p[text()='http://www.barcelona.com ']")
-		public WebElement displayedWebsite; 
+		public WebElement displayedWebsite;
 	
+	@FindBy (xpath = "//div[contains(@class, 'inline-block min-w-full py-2')]")
+		public WebElement dataTable; 
 	
-	
-	
-	
-	
+	@FindBy (xpath = "//span[contains(@class, 'font-medium text-primary-500 flex flex-col')]")
+		public List<WebElement> customerRows; 
 	
 	
 	

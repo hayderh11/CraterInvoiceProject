@@ -73,4 +73,21 @@ Feature: Create Customer Functionality for Invoice Application
     | Billing Address   |
     | Shipping Address  |
     
+    @verifyPopulation
+    Scenario: Verify Population of Add Customer table.
+    	Given I am on the Customers page
+    	Then I should see the table data populated 
+    	And I should be able to Select Check box populated for each customer row.
+    	And I should be able to see Name column populated with the customer’s display name for each row.
+    	And I should be able to see Phone column populated with the customer’s phone number for each row.
+    	And I should be able to see Amount Due column populated with the current amount the customer owes.
+    	And I should be able to see Added On column populated with the date that the customer was added on in the following format: <day> <Month> <Year>.
+    	Then I should be able to see More link represented by three dots for each row in the table.
+    
+    
+    
+    
+    
+    
+    
     
