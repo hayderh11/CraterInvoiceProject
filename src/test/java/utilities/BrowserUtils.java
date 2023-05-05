@@ -2,13 +2,13 @@ package utilities;
 
 import java.util.Random;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 public class BrowserUtils {
 	Actions action;
@@ -69,14 +69,14 @@ public class BrowserUtils {
 		String option = letsSelect.getFirstSelectedOption().getText();
 		return option;
 	}
-	
+
 	// this method generate 3 digit ramdom number
 	public int randomNumber() {
 		Random rand = new Random();
 		int randomNum = rand.nextInt((999 - 100) + 1) + 100;
 		return randomNum;
 	}
-	
+
 	// this method checks if an element exist in the dom (in the whole html)
 	public boolean isElementPresent(WebElement element) {
 		try {
@@ -86,6 +86,5 @@ public class BrowserUtils {
 		}
 		return true;
 	}
-
 
 }
