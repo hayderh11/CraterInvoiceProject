@@ -27,6 +27,7 @@ public class ForgotPasswordManagementSteps {
 		Driver.getDriver().get(DataReader.getProperty("appUrl"));
 		Thread.sleep(2000);
 		Assert.assertTrue(login.loginButton.isDisplayed());
+		System.out.println("Login Button is Displayed");
 	}
 
 	@When("I click on the forgot password link")
