@@ -211,7 +211,7 @@ public class CreateCustomerFunctionalityPage {
 		public WebElement updateCustomer;
 	
 	@FindBy (xpath = "//div[@class= 'flex-1 w-0 ml-3 text-left']")
-		public WebElement entireFlashMessage;
+		public WebElement wholeFlashMessage;
 	
 	
 	
