@@ -24,6 +24,34 @@ public class LogInPage {
 	@FindBy(xpath = "//button[text()='Login']")
 	public WebElement loginButton;
 	
+	@FindBy(xpath = "//*[@id=\"loginForm\"]/div[3]/div/a")
+	public WebElement forgotPwLink;
+	
+	@FindBy(xpath = "//div[text()='Enter email ']")
+	public WebElement forgotPwEmailHeader;
+	
+	@FindBy(xpath = "//div[text()='Send Reset Link']")
+	public WebElement sendresetLinkBtn;
+	
+	@FindBy(xpath = "//a[text()='Back to Login?']")
+	public WebElement backToLoginLink;
+	
+	@FindBy(xpath = "//*[@id=\"loginForm\"]/div[1]/div/div/input")
+	public WebElement resetPwEmailFeild;
+	
+	@FindBy(xpath = "//span[text()='Incorrect Email.']")
+	public WebElement invalidEmailFormatErrorMsg;
+	
+	@FindBy(xpath = "//span[text()='Field is required']")
+	public WebElement feildIsRequiredErrorMsg;
+	
+	@FindBy(id = "identifierId")
+	public WebElement gmailEmailField;
+	
+	
+	
+	
+	
 	public void login() {
 		utils.actionsSendKeys(emailField, DataReader.getProperty("username"));
 		utils.actionsSendKeys(passwordField, DataReader.getProperty("password"));

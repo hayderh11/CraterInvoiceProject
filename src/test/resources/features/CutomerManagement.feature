@@ -1,5 +1,5 @@
 
-@cutomersTest @regression
+	@cutomersTest @regression
 Feature: Create Customer Functionality for Invoice Application
   
   Background: 
