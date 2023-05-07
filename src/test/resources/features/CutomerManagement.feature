@@ -5,7 +5,7 @@ Feature: Create Customer Functionality for Invoice Application
   Background: 
     Given I am logged into the Crater application
 		And I have clicked on the 'Customers' menu link
-		
+		When I am on the 'Customers' page
   
 
   @verifyCustomerUI @smokeTest
@@ -84,8 +84,19 @@ Feature: Create Customer Functionality for Invoice Application
     	And I should be able to see Added On column populated with the date that the customer was added on in the following format: <day> <Month> <Year>.
     	Then I should be able to see More link represented by three dots for each row in the table.
     
-    
-    
+    @editCustomer
+    Scenario: Verify Edit Customer
+  		When I click on the more icon represented by three dots for the customer "Ronald Araujo Barcelona"
+ 		  And I choose to click on the button "Edit"
+ 		  Then I should be directed to the Edit Customer page
+  		And I should see all the customer fields mentioned in AC 2, 2.1, 2.3, 2.4
+  		When I edit the customer fields mentioned in AC 2, 2.1, 2.3, 2.4
+  		And I need to click on the "Update Customer" button
+  		Then I should be able see a flash message "Success! Customer updated successfully" with a close button to the right
+  		And the flash box should disappear within 5 seconds or less
+  		And I should be able to close the flash message by clicking on the 'X' button in the flash message 
+  		And I should be directed to the sales and expenses page of the customer that was updated
+  		And the application database should be updated with the edits made by me
     
     
     

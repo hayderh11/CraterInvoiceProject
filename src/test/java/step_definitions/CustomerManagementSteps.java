@@ -2,13 +2,13 @@ package step_definitions;
 
 
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -38,7 +39,9 @@ public class CustomerManagementSteps {
 	DButils dbutil = new DButils();
 	CreateCustomerFunctionalityPage customerLogin = new CreateCustomerFunctionalityPage();
 	
+	String customerName = "Ronald Araujo Barcelona";
 	
+//------------------------------------------
 	//Verify Customers Page UI components
 	
 	@Given("I am logged into the Crater application")
@@ -163,34 +166,34 @@ public class CustomerManagementSteps {
 		Map<String, String> data = dataTable.asMap(String.class, String.class);
 		
 		utils.waitUntilElementToBeClickable(customerLogin.basicInfoName);
-		customerLogin.basicInfoName.sendKeys("Ronald Araujo Barcelona");
+		customerLogin.basicInfoName.sendKeys(customerName);
 		
-		customerLogin.primaryContactName.sendKeys("Ronald Araujo");
+		customerLogin.basicPrimaryContactName.sendKeys("Ronald Araujo");
 		
-		customerLogin.emailField.sendKeys("ronald.ara@bracelona.com");
+		customerLogin.emailField.sendKeys("rronald.ara@bracelona.com");
 		
-		customerLogin.phoneField.sendKeys("7038924705");
+		customerLogin.basicPhoneField.sendKeys("7038924705");
 		
-		customerLogin.primaryCurrency.sendKeys("EUR - Euro");
-		utils.waitUntilElementToBeClickable(customerLogin.primaryCurrency);
-		customerLogin.primaryCurrency.sendKeys(Keys.ENTER);
+		customerLogin.basicPrimaryCurrency.sendKeys("EUR - Euro");
+		utils.waitUntilElementToBeClickable(customerLogin.basicPrimaryCurrency);
+		customerLogin.basicPrimaryCurrency.sendKeys(Keys.ENTER);
 		
 		Thread.sleep(1000);
-		customerLogin.websiteField.sendKeys("http://www.barcelona.com");
+		customerLogin.basicWebsiteField.sendKeys("http://www.barcelona.com");
 		
-		customerLogin.prefixField.sendKeys("RAB");
+		customerLogin.basicPrefixField.sendKeys("RAB");
 		Thread.sleep(1000);
 		
 	}
 	@When("I enter the following details for Portal Access:")
 	public void i_enter_the_following_details_for_portal_access(DataTable dataTable) throws InterruptedException {
 	    
-		customerLogin.portalAccess.click();
+		customerLogin.portalAccessSwitch.click();
 		
-		utils.waitUntilElementVisible(customerLogin.pAPassword);
-		customerLogin.pAPassword.sendKeys("RonaldAraujo");
+		utils.waitUntilElementVisible(customerLogin.portalPassword);
+		customerLogin.portalPassword.sendKeys("RonaldAraujo");
 		
-		customerLogin.confirmPassword.sendKeys("RonaldAraujo");
+		customerLogin.portalConfirmPassword.sendKeys("RonaldAraujo");
 		Thread.sleep(1000);
 		
 	}
@@ -245,7 +248,9 @@ public class CustomerManagementSteps {
 		 WebElement customerCreatedMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Customer created successfully']")));
 			 Assert.assertTrue(customerCreatedMessage.isDisplayed());
 			 String actualMessage2 = customerCreatedMessage.getText();
-			 System.out.println("Flash Message is: " +actualMessage2);
+			 System.out.println("Flash Message is: " + actualMessage2);
+			 
+			
 			 
 		}
 	@Then("the flash message should disappear within {int} seconds or less")
@@ -267,8 +272,8 @@ public class CustomerManagementSteps {
 		
 	}
 	@When("I click on the {string} button to close the flash message")
-	public void i_click_on_the_button_to_close_the_flash_message(String xButton) {
-	    
+	public void i_click_on_the_button_to_close_the_flash_message(String xButton) throws InterruptedException {
+		
 		
 //		utils.waitUntilElementToBeClickable(customerLogin.xButton);
 //		utils.actionsClick(customerLogin.xButton);
@@ -298,10 +303,10 @@ public class CustomerManagementSteps {
 	public void the_customer_information_for_the_following_sections_should_be_saved_in_the_application_database(DataTable dataTable) {
 	    
 	String customerName = "Ronald Araujo Barcelona";
-		String query = "SELECT name, email, phone, id FROM items where name='"+customerName+"';";
+		String query = "SELECT name, email, phone, id FROM cutomers where name='"+customerName+"';";
 		System.out.println(query);
-		List<String> itemInfo = dbutil.selectArecord(query);
-		for (String string : itemInfo) {
+		List<String> customerInfo = dbutil.selectArecord(query);
+		for (String string : customerInfo) {
 			System.out.println(string);
 		}
 		
@@ -432,5 +437,182 @@ public class CustomerManagementSteps {
 	    }
 	    	
 	    }
+	//-----------------------------------------------------
+		//Verify Edit Customer
+	
+	@When("I click on the more icon represented by three dots for the customer {string}")
+	public void i_click_on_the_more_icon_represented_by_three_dots_for_the_customer(String RonaldAraujoBarcelona) {
+		
+		utils.waitUntilElementToBeClickable(customerLogin.threeDotsLinkIcon);
+	    utils.actionsClick(customerLogin.threeDotsLinkIcon);
+		
+	}
+	@When("I choose to click on the button {string}")
+	public void i_choose_to_click_on_the_button(String RonaldAraujoBarcelona) throws InterruptedException {
+		
+	    utils.waitUntilElementToBeClickable(customerLogin.editButtonIcon);
+	    Thread.sleep(1000);
+	    customerLogin.editButtonIcon.click();
+	    
+	}
+	@Then("I should be directed to the Edit Customer page")
+	public void i_should_be_directed_to_the_edit_customer_page() {
+	    
+		utils.waitUntilElementVisible(customerLogin.editCustomerHeaderText);
+		Assert.assertTrue(customerLogin.editCustomerHeaderText.isDisplayed());
+		
+	}
+	@Then("I should see all the customer fields mentioned in AC {int}, {double}, {double}, {double}")
+	public void i_should_see_all_the_customer_fields_mentioned_in_ac(Integer AC2, Double AC2_1, Double AC2_3, Double AC2_4) {
+	    
+		utils.waitUntilElementVisible(customerLogin.basicInfoText);
+		Assert.assertTrue(customerLogin.basicInfoText.isDisplayed());
+		Assert.assertTrue(customerLogin.basicInfoName.isDisplayed());
+		Assert.assertTrue(customerLogin.basicPrimaryContactName.isDisplayed());
+		Assert.assertTrue(customerLogin.basicInfoEmail.isDisplayed());
+		Assert.assertTrue(customerLogin.basicPhoneField.isDisplayed());
+		Assert.assertTrue(customerLogin.basicPrimaryCurrency.isDisplayed());
+		Assert.assertTrue(customerLogin.basicWebsiteField.isDisplayed());
+		Assert.assertTrue(customerLogin.basicPrefixField.isDisplayed());
+		
+		utils.waitUntilElementVisible(customerLogin.portalAccessText);
+		Assert.assertTrue(customerLogin.portalAccessText.isDisplayed());
+		Assert.assertTrue(customerLogin.portalAccessSwitch.isDisplayed());
+		utils.waitUntilElementVisible(customerLogin.portalLoginUrl);
+		Assert.assertTrue(customerLogin.portalLoginUrl.isDisplayed());
+		Assert.assertTrue(customerLogin.portalPassword.isDisplayed());
+		Assert.assertTrue(customerLogin.portalConfirmPassword.isDisplayed());
+		
+		utils.waitUntilElementVisible(customerLogin.billingAddText);
+		Assert.assertTrue(customerLogin.billingAddText.isDisplayed());
+		Assert.assertTrue(customerLogin.billingName.isDisplayed());
+		Assert.assertTrue(customerLogin.billingCountry.isDisplayed());
+		Assert.assertTrue(customerLogin.billingState.isDisplayed());
+		Assert.assertTrue(customerLogin.billingCity.isDisplayed());
+		Assert.assertTrue(customerLogin.billingAddress.isDisplayed());
+		Assert.assertTrue(customerLogin.billingPhone.isDisplayed());
+		Assert.assertTrue(customerLogin.billingZipCode.isDisplayed());
+		
+		utils.waitUntilElementVisible(customerLogin.shippingAddText);
+		Assert.assertTrue(customerLogin.shippingAddText.isDisplayed());
+		Assert.assertTrue(customerLogin.shippingName.isDisplayed());
+		Assert.assertTrue(customerLogin.shippingCountry.isDisplayed());
+		Assert.assertTrue(customerLogin.shippingState.isDisplayed());
+		Assert.assertTrue(customerLogin.shippingCity.isDisplayed());
+		Assert.assertTrue(customerLogin.shippingAddress.isDisplayed());
+		Assert.assertTrue(customerLogin.shippingPhone.isDisplayed());
+		Assert.assertTrue(customerLogin.shippingZipCode.isDisplayed());
+		
+	}
+	@When("I edit the customer fields mentioned in AC {int}, {double}, {double}, {double}")
+	public void i_edit_the_customer_fields_mentioned_in_ac(Integer AC2, Double AC2_1, Double AC2_3, Double AC2_4) {
+	    
+		customerLogin.basicInfoName.clear();
+		customerLogin.basicInfoName.sendKeys("Edit Customer");
+		customerLogin.basicPrimaryContactName.clear();
+		customerLogin.basicPrimaryContactName.sendKeys("Edit Name");
+		customerLogin.basicInfoEmail.clear();
+		customerLogin.basicInfoEmail.sendKeys("editemail@primetech.com");
+		customerLogin.basicPhoneField.clear();
+		customerLogin.basicPhoneField.sendKeys("703-908-7642");
+		customerLogin.basicPrimaryCurrency.clear();
+		customerLogin.basicPrimaryCurrency.sendKeys("IQD - Iraqi Dinar", Keys.ENTER);
+		customerLogin.basicWebsiteField.clear();
+		customerLogin.basicWebsiteField.sendKeys("http://www.editwebsite.com");
+		customerLogin.basicPrefixField.clear();
+		customerLogin.basicPrefixField.sendKeys("SDET");
+		
+		customerLogin.portalPassword.clear();
+		customerLogin.portalPassword.sendKeys("Editpassword123");
+		customerLogin.portalConfirmPassword.clear();
+		customerLogin.portalConfirmPassword.sendKeys("Editpassword123");
+
+		customerLogin.billingName.clear();
+		customerLogin.billingName.sendKeys("Edit Customer");
+		customerLogin.billingCountry.clear();
+		customerLogin.billingCountry.sendKeys("Iraq", Keys.ENTER);
+		customerLogin.billingState.clear();
+		customerLogin.billingState.sendKeys("Babylon");
+		customerLogin.billingCity.clear();
+		customerLogin.billingCity.sendKeys("Hilla");
+		customerLogin.billingAddress.clear();
+		customerLogin.billingAddress.sendKeys("780 Babylon St");
+		customerLogin.billingPhone.clear();
+		customerLogin.billingPhone.sendKeys("703-908-7642");
+		customerLogin.billingZipCode.clear();
+		customerLogin.billingZipCode.sendKeys("25708");
+		
+		customerLogin.copyFromBilling.click();
+		
+	}
+	
+	@And("I need to click on the {string} button")
+	public void i_need_to_click_on_the_button(String updateCustomer) throws InterruptedException {
+	    
+		utils.waitUntilElementVisible(customerLogin.updateCustomer);
+		Thread.sleep(500);
+		utils.actionsClick(customerLogin.updateCustomer);
+		
+	}
+	@Then("I should be able see a flash message {string} with a close button to the right")
+	public void i_should_be_able_see_a_flash_message_with_a_close_button_to_the_right(String string) {
+	    
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+		 
+		 WebElement successfulMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Success!']")));
+			 Assert.assertTrue(successfulMessage.isDisplayed());
+			 String actualMessage = successfulMessage.getText();
+			 System.out.println("Flash Message is: " + actualMessage);
+			    
+		 WebElement customerUpdatedMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Customer updated successfully']")));
+			 Assert.assertTrue(customerUpdatedMessage.isDisplayed());
+			 String actualMessage2 = customerUpdatedMessage.getText();
+			 System.out.println("Flash Message is: " + actualMessage2);
+		
+	}
+	@Then("the flash box should disappear within {int} seconds or less")
+	public void the_flash_box_should_disappear_within_seconds_or_less(Integer seconds) throws InterruptedException {
+		
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+		By flashMessageLocator = By.xpath("//p[text()='Customer updated successfully']");
+			
+		boolean isMessageDisplayed = true;
+		try {
+		    wait.until(ExpectedConditions.invisibilityOfElementLocated(flashMessageLocator));
+		} catch (TimeoutException e) {
+		    isMessageDisplayed = false;
+		}
+
+		Assert.assertFalse("Flash message is still displayed after " + seconds + " seconds.", !isMessageDisplayed);
+	
+		Thread.sleep(1000);
+		
+	}
+	@Then("I should be able to close the flash message by clicking on the {string} button in the flash message")
+	public void i_should_be_able_to_close_the_flash_message_by_clicking_on_the_button_in_the_flash_message(String xButton) {
+	    
+//		utils.waitUntilElementToBeClickable(customerLogin.xButton);
+//		utils.actionsClick(customerLogin.xButton);
+		
+	}
+	@Then("I should be directed to the sales and expenses page of the customer that was updated")
+	public void i_should_be_directed_to_the_sales_and_expenses_page_of_the_customer_that_was_updated() {
+	   
+		utils.waitUntilElementVisible(customerLogin.salesAndExpensesPage);
+		Assert.assertTrue(customerLogin.salesAndExpensesPage.isDisplayed());
+		
+	}
+	@Then("the application database should be updated with the edits made by me")
+	public void the_application_database_should_be_updated_with_the_edits_made_by_me() {
+	    
+		String customerName = "Edit Customer";
+		String query = "SELECT name, email, phone, id FROM cutomers where name='"+customerName+"';";
+		System.out.println(query);
+		List<String> customerInfo = dbutil.selectArecord(query);
+		for (String string : customerInfo) {
+			System.out.println(string);
+		}
+	}
+	
 }
 	
