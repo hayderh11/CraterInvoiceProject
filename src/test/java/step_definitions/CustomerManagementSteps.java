@@ -41,6 +41,7 @@ public class CustomerManagementSteps {
 	CreateCustomerFunctionalityPage customerLogin = new CreateCustomerFunctionalityPage();
 	
 	String customerName = "Ronald Araujo Barcelona";
+	String editCustomerName = "Edit Customer";
 	
 //------------------------------------------
 	//Verify Customers Page UI components
@@ -303,8 +304,7 @@ public class CustomerManagementSteps {
 	@Then("the customer information for the following sections should be saved in the application database:")
 	public void the_customer_information_for_the_following_sections_should_be_saved_in_the_application_database(DataTable dataTable) {
 	    
-	String customerName = "Ronald Araujo Barcelona";
-		String query = "SELECT name, email, phone, id FROM cutomers where name='"+customerName+"';";
+		String query = "SELECT name, email, phone, id FROM customers where name='"+customerName+"';";
 		System.out.println(query);
 		List<String> customerInfo = dbutil.selectArecord(query);
 		for (String string : customerInfo) {
@@ -606,8 +606,7 @@ public class CustomerManagementSteps {
 	@Then("the application database should be updated with the edits made by me")
 	public void the_application_database_should_be_updated_with_the_edits_made_by_me() {
 	    
-		String customerName = "Edit Customer";
-		String query = "SELECT name, email, phone, id FROM cutomers where name='"+customerName+"';";
+		String query = "SELECT name, email, phone, id FROM customers where name='"+editCustomerName+"';";
 		System.out.println(query);
 		List<String> customerInfo = dbutil.selectArecord(query);
 		for (String string : customerInfo) {
@@ -619,11 +618,10 @@ public class CustomerManagementSteps {
 		// Verify Delete Customer
 	
 	@When("I click on the three dots icon that is represented by three dots for the customer {string}")
-	public void i_click_on_the_three_dots_icon_that_is_represented_by_three_dots_for_the_customer(String string) {
+	public void i_click_on_the_three_dots_icon_that_is_represented_by_three_dots_for_the_customer(String moreLink) {
 	   
 		utils.waitUntilElementToBeClickable(customerLogin.threeDotsLinkIcon);
 	    utils.actionsClick(customerLogin.threeDotsLinkIcon);
-		
 		
 	}
 	@When("I click on button {string}")
@@ -663,50 +661,89 @@ public class CustomerManagementSteps {
 		
 	}
 	@Then("the modal should be closed")
-	public void the_modal_should_be_closed() {
+	public void the_modal_should_be_closed() throws InterruptedException {
 	   
 		Assert.assertTrue(customerLogin.customersPageHeaderText.isDisplayed());
-		
+		Thread.sleep(500);
 		
 	}
 	@When("I choose to click on {string} button that is on the model")
-	public void i_choose_to_click_on_button_that_is_on_the_model(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void i_choose_to_click_on_button_that_is_on_the_model(String okButton) throws InterruptedException {
+	    
+		utils.waitUntilElementToBeClickable(customerLogin.threeDotsLinkIcon);
+	    utils.actionsClick(customerLogin.threeDotsLinkIcon);
+	    
+	    utils.waitUntilElementToBeClickable(customerLogin.deleteButtonIcon);
+		customerLogin.deleteButtonIcon.click();
+		
+		Thread.sleep(500);
+		customerLogin.modalOkButton.click();
+		
 	}
 	@Then("I should see a flash message {string} with a close button to the right")
-	public void i_should_see_a_flash_message_with_a_close_button_to_the_right(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void i_should_see_a_flash_message_with_a_close_button_to_the_right(String customerDeleted) {
+	    
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+		 
+		 WebElement successfulMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Success!']")));
+			 Assert.assertTrue(successfulMessage.isDisplayed());
+			 String actualMessage = successfulMessage.getText();
+			 System.out.println("Flash Message is: " + actualMessage);
+			    
+		 WebElement customerDeletedMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Customer deleted successfully']")));
+			 Assert.assertTrue(customerDeletedMessage.isDisplayed());
+			 String actualMessage2 = customerDeletedMessage.getText();
+			 System.out.println("Flash Message is: " + actualMessage2);
+		
 	}
 	@Then("I should be able to close the flash message appearing on the page by clicking on the {string} button")
-	public void i_should_be_able_to_close_the_flash_message_appearing_on_the_page_by_clicking_on_the_button(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void i_should_be_able_to_close_the_flash_message_appearing_on_the_page_by_clicking_on_the_button(String xButton) {
+	    
+//		utils.waitUntilElementToBeClickable(customerLogin.xButton);
+//		utils.actionsClick(customerLogin.xButton);
+		
 	}
 	@Then("I should be directed to the customer table")
 	public void i_should_be_directed_to_the_customer_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
+		Assert.assertTrue(customerLogin.dataTable.isDisplayed());
+		
+		
 	}
 	@Then("I should not be able to view the customer {string} in the customer table")
-	public void i_should_not_be_able_to_view_the_customer_in_the_customer_table(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void i_should_not_be_able_to_view_the_customer_in_the_customer_table(String EditCustomer) {
+	   
+		WebElement table = Driver.getDriver().findElement(By.xpath("//div[@class= 'relative table-container']"));
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		
+		 boolean found = false;
+		    for (WebElement row : rows) {
+		        List<WebElement> columns = row.findElements(By.tagName("td"));
+		        for (WebElement column : columns) {
+		            if (column.getText().equals(editCustomerName)) {
+		                found = true;
+		                break;
+		            }
+		        }
+		        if (found) {
+		            break;
+		        }
+		    }
+		   Assert.assertFalse("Customer should not be present in the customer table", found);
+		
 	}
 	@Then("the customer record should be deleted from the application database.")
 	public void the_customer_record_should_be_deleted_from_the_application_database() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
+		String query = "SELECT name, email, phone, id FROM customers where name='"+editCustomerName+"';";
+		System.out.println(query);
+		List<String> customerInfo = dbutil.selectArecord(query);
+		for (String string : customerInfo) {
+			System.out.println(string);
+			
+		}
+		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
 	
