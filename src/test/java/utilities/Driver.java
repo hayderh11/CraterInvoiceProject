@@ -23,10 +23,13 @@ public class Driver {
 	
 	private static WebDriver driver;
 	public static WebDriver getDriver() {
+		
 		String browser = System.getProperty("browser");
 		if (browser == null) {
 			browser = DataReader.getProperty("browser");
+			
 		}
+		
 		if (driver == null || ((RemoteWebDriver) driver).getSessionId() == null) {
 			switch (browser) {
 			case "firefox":
@@ -51,6 +54,7 @@ public class Driver {
 				options.addArguments("--headless");
 				driver = new ChromeDriver(options);
 			}
+			
 		}
 		return driver;
 	}
