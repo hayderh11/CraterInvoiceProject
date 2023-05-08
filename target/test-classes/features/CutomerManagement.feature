@@ -98,7 +98,20 @@ Feature: Create Customer Functionality for Invoice Application
   		And I should be directed to the sales and expenses page of the customer that was updated
   		And the application database should be updated with the edits made by me
     
-    
+    @deleteCustomer
+    Scenario: Verify Delete Customer
+    When I click on the three dots icon that is represented by three dots for the customer "Edit Customer"
+		And I click on button "Delete"
+		Then I should be prompted with a modal with title "<Alert Icon> Are you sure?" and message "You will not be able to recover this customer and all the related Invoices, Estimates and Payments."
+		And the modal should have "Ok" and "Cancel" buttons
+		When I click on "Cancel" or anywhere on the page
+		Then the modal should be closed
+		When I choose to click on "Ok" button that is on the model
+		Then I should see a flash message "Success! Customer deleted successfully" with a close button to the right
+		And I should be able to close the flash message appearing on the page by clicking on the 'X' button
+		And I should be directed to the customer table
+		And I should not be able to view the customer "Edit Customer" in the customer table
+		And the customer record should be deleted from the application database.
     
     
     

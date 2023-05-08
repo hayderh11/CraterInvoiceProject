@@ -11,6 +11,7 @@ import java.util.Map;
 
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -65,8 +66,8 @@ public class CustomerManagementSteps {
 	@When("I am on the {string} page")
 	public void i_am_on_the_page(String Customers) {
 		
-		utils.waitUntilElementVisible(customerLogin.cutomersPageHeaderText);
-		Assert.assertTrue(customerLogin.cutomersPageHeaderText.isDisplayed());
+		utils.waitUntilElementVisible(customerLogin.customersPageHeaderText);
+		Assert.assertTrue(customerLogin.customersPageHeaderText.isDisplayed());
 		
 	}
 	@Then("I should see the menu navigation path as {string} placed under {string}.")
@@ -149,8 +150,8 @@ public class CustomerManagementSteps {
 	@Given("I am on the Customers page")
 	public void i_am_on_the_customers_page() {
 		
-		utils.waitUntilElementVisible(customerLogin.cutomersPageHeaderText);
-		Assert.assertTrue(customerLogin.cutomersPageHeaderText.isDisplayed());	    
+		utils.waitUntilElementVisible(customerLogin.customersPageHeaderText);
+		Assert.assertTrue(customerLogin.customersPageHeaderText.isDisplayed());	    
 
 	}
 	@When("I click on {string}")
@@ -613,6 +614,99 @@ public class CustomerManagementSteps {
 			System.out.println(string);
 		}
 	}
+	
+	//--------------------------------------------
+		// Verify Delete Customer
+	
+	@When("I click on the three dots icon that is represented by three dots for the customer {string}")
+	public void i_click_on_the_three_dots_icon_that_is_represented_by_three_dots_for_the_customer(String string) {
+	   
+		utils.waitUntilElementToBeClickable(customerLogin.threeDotsLinkIcon);
+	    utils.actionsClick(customerLogin.threeDotsLinkIcon);
+		
+		
+	}
+	@When("I click on button {string}")
+	public void i_click_on_button(String delete) {
+	    
+		utils.waitUntilElementToBeClickable(customerLogin.deleteButtonIcon);
+		customerLogin.deleteButtonIcon.click();
+		
+	}
+	@Then("I should be prompted with a modal with title {string} and message {string}")
+	public void i_should_be_prompted_with_a_modal_with_title_and_message(String modalTitle, String modalMessage) {
+	   
+		utils.waitUntilElementVisible(customerLogin.alertMessage);
+		
+	    Assert.assertTrue(customerLogin.modalTitle.isDisplayed());
+		Assert.assertTrue(customerLogin.modalMessage.isDisplayed());
+		
+		String titleText = customerLogin.modalTitle.getText();
+		String messageText = customerLogin.modalMessage.getText();
+		
+		System.out.println(titleText);
+		System.out.println(messageText);
+
+	}
+	@Then("the modal should have {string} and {string} buttons")
+	public void the_modal_should_have_and_buttons(String okButton, String cancelButton) {
+	    
+		Assert.assertTrue(customerLogin.modalOkButton.isDisplayed());
+		Assert.assertTrue(customerLogin.modalCancelButton.isDisplayed());
+		
+	}
+	@When("I click on {string} or anywhere on the page")
+	public void i_click_on_or_anywhere_on_the_page(String cancelButton) throws InterruptedException {
+	    
+		Thread.sleep(500);
+		customerLogin.modalCancelButton.click();
+		
+	}
+	@Then("the modal should be closed")
+	public void the_modal_should_be_closed() {
+	   
+		Assert.assertTrue(customerLogin.customersPageHeaderText.isDisplayed());
+		
+		
+	}
+	@When("I choose to click on {string} button that is on the model")
+	public void i_choose_to_click_on_button_that_is_on_the_model(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("I should see a flash message {string} with a close button to the right")
+	public void i_should_see_a_flash_message_with_a_close_button_to_the_right(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("I should be able to close the flash message appearing on the page by clicking on the {string} button")
+	public void i_should_be_able_to_close_the_flash_message_appearing_on_the_page_by_clicking_on_the_button(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("I should be directed to the customer table")
+	public void i_should_be_directed_to_the_customer_table() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("I should not be able to view the customer {string} in the customer table")
+	public void i_should_not_be_able_to_view_the_customer_in_the_customer_table(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("the customer record should be deleted from the application database.")
+	public void the_customer_record_should_be_deleted_from_the_application_database() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 	
