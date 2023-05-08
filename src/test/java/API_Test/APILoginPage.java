@@ -1,25 +1,11 @@
-package pages;
+package API_Test;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.basePath;
-import static io.restassured.RestAssured.given;
-import static org.testng.Assert.assertEquals;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import utilities.BrowserUtils;
-import utilities.DataReader;
 
 public class APILoginPage
 {
