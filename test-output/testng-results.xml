@@ -2,28 +2,28 @@
 <testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-05-09T20:22:04 EDT" name="Default suite" finished-at="2023-05-09T20:22:07 EDT" duration-ms="3719">
+  <suite started-at="2023-05-09T22:56:38 EDT" name="Default suite" finished-at="2023-05-09T22:56:42 EDT" duration-ms="3823">
     <groups>
     </groups>
-    <test started-at="2023-05-09T20:22:04 EDT" name="Default test" finished-at="2023-05-09T20:22:07 EDT" duration-ms="3719">
+    <test started-at="2023-05-09T22:56:38 EDT" name="Default test" finished-at="2023-05-09T22:56:42 EDT" duration-ms="3823">
       <class name="API_Test.APILoginPage">
-        <test-method is-config="true" signature="setup()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T20:22:04 EDT" name="setup" finished-at="2023-05-09T20:22:04 EDT" duration-ms="742" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T22:56:38 EDT" name="setup" finished-at="2023-05-09T22:56:38 EDT" duration-ms="727" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="testcase1ValidLogin()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T20:22:04 EDT" name="testcase1ValidLogin" finished-at="2023-05-09T20:22:07 EDT" duration-ms="2250" status="PASS">
+        <test-method signature="testcase1ValidLogin()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T22:56:38 EDT" name="testcase1ValidLogin" finished-at="2023-05-09T22:56:41 EDT" duration-ms="2314" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testcase1ValidLogin -->
-        <test-method signature="testcase2IncorrectEndpoint()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T20:22:07 EDT" name="testcase2IncorrectEndpoint" finished-at="2023-05-09T20:22:07 EDT" duration-ms="222" status="PASS">
+        <test-method signature="testcase2IncorrectEndpoint()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T22:56:41 EDT" name="testcase2IncorrectEndpoint" finished-at="2023-05-09T22:56:41 EDT" duration-ms="266" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testcase2IncorrectEndpoint -->
-        <test-method signature="testcase3ImproperBody()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T20:22:07 EDT" name="testcase3ImproperBody" finished-at="2023-05-09T20:22:07 EDT" duration-ms="226" status="PASS">
+        <test-method signature="testcase3ImproperBody()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T22:56:41 EDT" name="testcase3ImproperBody" finished-at="2023-05-09T22:56:41 EDT" duration-ms="233" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testcase3ImproperBody -->
-        <test-method signature="testcase4WrongUsernamePassword()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T20:22:07 EDT" name="testcase4WrongUsernamePassword" finished-at="2023-05-09T20:22:07 EDT" duration-ms="225" status="PASS">
+        <test-method signature="testcase4WrongUsernamePassword()[pri:0, instance:API_Test.APILoginPage@5acf93bb]" started-at="2023-05-09T22:56:41 EDT" name="testcase4WrongUsernamePassword" finished-at="2023-05-09T22:56:42 EDT" duration-ms="239" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testcase4WrongUsernamePassword -->
