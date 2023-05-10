@@ -6,7 +6,8 @@
       <class name="API_Test.APILoginPage">
         <methods>
           <include name="setup"/>
-          <include name="testcase4WrongUsernamePassword"/>
+          <include name="inValidToken"/>
+          <include name="testcase1ValidLogin"/>
         </methods>
       </class> <!-- API_Test.APILoginPage -->
     </classes>
