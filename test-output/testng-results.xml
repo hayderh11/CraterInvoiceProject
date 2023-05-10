@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-05-09T20:10:16 EDT" name="Default suite" finished-at="2023-05-09T20:10:20 EDT" duration-ms="4549">
+    <groups>
+    </groups>
+    <test started-at="2023-05-09T20:10:16 EDT" name="Default test" finished-at="2023-05-09T20:10:20 EDT" duration-ms="4549">
+      <class name="API_Test.APITests">
+        <test-method is-config="true" signature="setup()[pri:0, instance:API_Test.APITests@4738a206]" started-at="2023-05-09T20:10:16 EDT" name="setup" finished-at="2023-05-09T20:10:16 EDT" duration-ms="804" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testcase1ValidLogin()[pri:0, instance:API_Test.APITests@4738a206]" started-at="2023-05-09T20:10:16 EDT" name="testcase1ValidLogin" finished-at="2023-05-09T20:10:19 EDT" duration-ms="2285" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcase1ValidLogin -->
+        <test-method signature="testcase2IncorrectEndpoint()[pri:0, instance:API_Test.APITests@4738a206]" started-at="2023-05-09T20:10:19 EDT" name="testcase2IncorrectEndpoint" finished-at="2023-05-09T20:10:19 EDT" duration-ms="265" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcase2IncorrectEndpoint -->
+        <test-method signature="testcase3ImproperBody()[pri:0, instance:API_Test.APITests@4738a206]" started-at="2023-05-09T20:10:19 EDT" name="testcase3ImproperBody" finished-at="2023-05-09T20:10:19 EDT" duration-ms="232" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcase3ImproperBody -->
+        <test-method signature="testcase4WrongUsernamePassword()[pri:0, instance:API_Test.APITests@4738a206]" started-at="2023-05-09T20:10:19 EDT" name="testcase4WrongUsernamePassword" finished-at="2023-05-09T20:10:19 EDT" duration-ms="218" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcase4WrongUsernamePassword -->
+        <test-method signature="inValidToken()[pri:0, instance:API_Test.APITests@4738a206]" started-at="2023-05-09T20:10:19 EDT" name="inValidToken" finished-at="2023-05-09T20:10:20 EDT" depends-on-methods="API_Test.APITests.testcase1ValidLogin" duration-ms="375" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- inValidToken -->
+        <test-method signature="validateToken()[pri:0, instance:API_Test.APITests@4738a206]" started-at="2023-05-09T20:10:20 EDT" name="validateToken" finished-at="2023-05-09T20:10:20 EDT" depends-on-methods="API_Test.APITests.testcase1ValidLogin" duration-ms="305" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateToken -->
+      </class> <!-- API_Test.APITests -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
