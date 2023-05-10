@@ -11,6 +11,7 @@ import java.util.Map;
 
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -40,6 +41,7 @@ public class CustomerManagementSteps {
 	CreateCustomerFunctionalityPage customerLogin = new CreateCustomerFunctionalityPage();
 	
 	String customerName = "Ronald Araujo Barcelona";
+	String editCustomerName = "Edit Customer";
 	
 //------------------------------------------
 	//Verify Customers Page UI components
@@ -65,8 +67,8 @@ public class CustomerManagementSteps {
 	@When("I am on the {string} page")
 	public void i_am_on_the_page(String Customers) {
 		
-		utils.waitUntilElementVisible(customerLogin.cutomersPageHeaderText);
-		Assert.assertTrue(customerLogin.cutomersPageHeaderText.isDisplayed());
+		utils.waitUntilElementVisible(customerLogin.customersPageHeaderText);
+		Assert.assertTrue(customerLogin.customersPageHeaderText.isDisplayed());
 		
 	}
 	@Then("I should see the menu navigation path as {string} placed under {string}.")
@@ -149,12 +151,12 @@ public class CustomerManagementSteps {
 	@Given("I am on the Customers page")
 	public void i_am_on_the_customers_page() {
 		
-		utils.waitUntilElementVisible(customerLogin.cutomersPageHeaderText);
-		Assert.assertTrue(customerLogin.cutomersPageHeaderText.isDisplayed());	    
+		utils.waitUntilElementVisible(customerLogin.customersPageHeaderText);
+		Assert.assertTrue(customerLogin.customersPageHeaderText.isDisplayed());	    
 
 	}
 	@When("I click on {string}")
-	public void i_click_on(String newCustomer) throws InterruptedException {
+	public void i_click_on_the_(String newCustomer) throws InterruptedException {
 	    
 		utils.waitUntilElementVisible(customerLogin.newCutomerButton);
 		customerLogin.newCutomerButton.click();
@@ -302,8 +304,7 @@ public class CustomerManagementSteps {
 	@Then("the customer information for the following sections should be saved in the application database:")
 	public void the_customer_information_for_the_following_sections_should_be_saved_in_the_application_database(DataTable dataTable) {
 	    
-	String customerName = "Ronald Araujo Barcelona";
-		String query = "SELECT name, email, phone, id FROM cutomers where name='"+customerName+"';";
+		String query = "SELECT name, email, phone, id FROM customers where name='"+customerName+"';";
 		System.out.println(query);
 		List<String> customerInfo = dbutil.selectArecord(query);
 		for (String string : customerInfo) {
@@ -605,13 +606,145 @@ public class CustomerManagementSteps {
 	@Then("the application database should be updated with the edits made by me")
 	public void the_application_database_should_be_updated_with_the_edits_made_by_me() {
 	    
-		String customerName = "Edit Customer";
-		String query = "SELECT name, email, phone, id FROM cutomers where name='"+customerName+"';";
+		String query = "SELECT name, email, phone, id FROM customers where name='"+editCustomerName+"';";
 		System.out.println(query);
 		List<String> customerInfo = dbutil.selectArecord(query);
 		for (String string : customerInfo) {
 			System.out.println(string);
 		}
+	}
+	
+	//--------------------------------------------
+		// Verify Delete Customer
+	
+	@When("I click on the three dots icon that is represented by three dots for the customer {string}")
+	public void i_click_on_the_three_dots_icon_that_is_represented_by_three_dots_for_the_customer(String moreLink) {
+	   
+		utils.waitUntilElementToBeClickable(customerLogin.threeDotsLinkIcon);
+	    utils.actionsClick(customerLogin.threeDotsLinkIcon);
+		
+	}
+	@When("I click on {string} button")
+	public void i_click_on_delete_button(String delete) {
+	    
+		utils.waitUntilElementToBeClickable(customerLogin.deleteButtonIcon);
+		customerLogin.deleteButtonIcon.click();
+		
+	}
+	@Then("I should be prompted with a modal with title {string} and message {string}")
+	public void i_should_be_prompted_with_a_modal_with_title_and_message(String modalTitle, String modalMessage) {
+	   
+		utils.waitUntilElementVisible(customerLogin.alertMessage);
+		
+	    Assert.assertTrue(customerLogin.modalTitle.isDisplayed());
+		Assert.assertTrue(customerLogin.modalMessage.isDisplayed());
+		
+		String titleText = customerLogin.modalTitle.getText();
+		String messageText = customerLogin.modalMessage.getText();
+		
+		System.out.println(titleText);
+		System.out.println(messageText);
+
+	}
+	@Then("the modal should have {string} and {string} buttons")
+	public void the_modal_should_have_and_buttons(String okButton, String cancelButton) {
+	    
+		Assert.assertTrue(customerLogin.modalOkButton.isDisplayed());
+		Assert.assertTrue(customerLogin.modalCancelButton.isDisplayed());
+		
+	}
+	@When("I click on {string} or anywhere on the page")
+	public void i_click_on_or_anywhere_on_the_page(String cancelButton) throws InterruptedException {
+	    
+		Thread.sleep(500);
+		customerLogin.modalCancelButton.click();
+		
+	}
+	@Then("the modal should be closed")
+	public void the_modal_should_be_closed() throws InterruptedException {
+	   
+		Assert.assertTrue(customerLogin.customersPageHeaderText.isDisplayed());
+		Thread.sleep(500);
+		
+	}
+	@When("I choose to click on {string} button that is on the model")
+	public void i_choose_to_click_on_button_that_is_on_the_model(String okButton) throws InterruptedException {
+	    
+		utils.waitUntilElementToBeClickable(customerLogin.threeDotsLinkIcon);
+	    utils.actionsClick(customerLogin.threeDotsLinkIcon);
+	    
+	    utils.waitUntilElementToBeClickable(customerLogin.deleteButtonIcon);
+		customerLogin.deleteButtonIcon.click();
+		
+		Thread.sleep(500);
+		customerLogin.modalOkButton.click();
+		
+	}
+	@Then("I should see a flash message {string} with a close button to the right")
+	public void i_should_see_a_flash_message_with_a_close_button_to_the_right(String customerDeleted) {
+	    
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+		 
+		 WebElement successfulMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Success!']")));
+			 Assert.assertTrue(successfulMessage.isDisplayed());
+			 String actualMessage = successfulMessage.getText();
+			 System.out.println("Flash Message is: " + actualMessage);
+			    
+		 WebElement customerDeletedMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Customer deleted successfully']")));
+			 Assert.assertTrue(customerDeletedMessage.isDisplayed());
+			 String actualMessage2 = customerDeletedMessage.getText();
+			 System.out.println("Flash Message is: " + actualMessage2);
+		
+	}
+	@Then("I should be able to close the flash message appearing on the page by clicking on the {string} button")
+	public void i_should_be_able_to_close_the_flash_message_appearing_on_the_page_by_clicking_on_the_button(String xButton) {
+	    
+//		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+//		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='text-gray-400 focus:text-gray-500 inline-flex w-5 h-5 transition duration-150 ease-in-out focus:outline-none']")));
+		utils.waitUntilElementToBeClickable(customerLogin.xButton);
+		utils.actionsClick(customerLogin.xButton);
+		
+	}
+	@Then("I should be directed to the customer table")
+	public void i_should_be_directed_to_the_customer_table() {
+	    
+		Assert.assertTrue(customerLogin.dataTable.isDisplayed());
+		
+		
+	}
+	@Then("I should not be able to view the customer {string} in the customer table")
+	public void i_should_not_be_able_to_view_the_customer_in_the_customer_table(String EditCustomer) {
+	   
+		WebElement table = Driver.getDriver().findElement(By.xpath("//div[@class= 'relative table-container']"));
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		
+		 boolean found = false;
+		    for (WebElement row : rows) {
+		        List<WebElement> columns = row.findElements(By.tagName("td"));
+		        for (WebElement column : columns) {
+		            if (column.getText().equals(editCustomerName)) {
+		                found = true;
+		                break;
+		            }
+		        }
+		        if (found) {
+		            break;
+		        }
+		    }
+		   Assert.assertFalse("Customer should not be present in the customer table", found);
+		
+	}
+	@Then("the customer record should be deleted from the application database.")
+	public void the_customer_record_should_be_deleted_from_the_application_database() {
+	    
+		String query = "SELECT name, email, phone, id FROM customers where name='"+editCustomerName+"';";
+		System.out.println(query);
+		List<String> customerInfo = dbutil.selectArecord(query);
+		for (String string : customerInfo) {
+			System.out.println(string);
+			
+		}
+		
 	}
 	
 }

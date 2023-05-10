@@ -1,9 +1,6 @@
 package API_Test;
 
-
 import org.hamcrest.Matchers;
-
-
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,8 +8,8 @@ import org.testng.annotations.Test;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-public class APILoginPage
-{
+public class APITests {
+
 	Response response;
 	String token;
 
@@ -119,11 +116,39 @@ public class APILoginPage
 		Assert.assertEquals(response.getStatusCode(), 422);
 		}
 	
-	
+	//Valid token Check
+		@Test(dependsOnMethods = "testcase1ValidLogin")
+		public void validateToken() {
+			
+			String endpoint = "api/v1/auth/check";
+			
+			response = RestAssured.given()
+			.contentType("application/json")
+			.accept("application/json")
+			.auth().oauth2( "Bearer " +token+"")
+			.get(endpoint)
+			.thenReturn();
+			
+//			response.prettyPrint();
+			
+			response.then().statusCode(200);
+		}
 		
-	
-	
-	
-
-	
+		//invalid token
+		@Test(dependsOnMethods = "testcase1ValidLogin")
+		public void inValidToken() {
+			String endpoint = "api/v1/auth/check";
+			
+			response = RestAssured.given()
+			.contentType("application/json")
+			.accept("application/json")
+			.auth().oauth2( "Bearer " +token+123+"")
+			.get(endpoint)
+			.thenReturn();
+			
+			response.then().statusCode(401)
+			.and().assertThat().body("message", Matchers.equalTo("Unauthenticated."));
+			
+		}
+		
 }

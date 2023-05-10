@@ -23,7 +23,7 @@ Feature: Items Page
 
   @VerifyItemPage @smoketest
   Scenario: I am able to verify Item page
-    When I click on "+ Add Item"
+  #  When I click on "+ Add Item"
     Then I should be on the page
     And in Name Field, I should see an Error Message "Display Name must be less than 50 characters" if i insert 50 characters or more
     And I should see Price with numerical values

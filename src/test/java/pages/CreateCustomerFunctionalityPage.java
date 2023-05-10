@@ -22,7 +22,7 @@ public class CreateCustomerFunctionalityPage {
 		public WebElement passwordField;
 	
 	@FindBy (xpath = "//h3[text()='Customers']")
-		public WebElement cutomersPageHeaderText;
+		public WebElement customersPageHeaderText;
 		
 	@FindBy (xpath ="//ol[contains(@class, 'flex flex-wrap py-4')]")
 		public WebElement menuNavPath;  
@@ -159,8 +159,8 @@ public class CreateCustomerFunctionalityPage {
 	@FindBy (xpath = "//p[text()='Customer created successfully']")
 		public WebElement customerCreatedMessage; 
 	
-	// @FindBy (xpath = "//*[@class='text-gray-400 focus:text-gray-500 inline-flex w-5 h-5 transition duration-150 ease-in-out focus:outline-none']")
-	//	public WebElement xButton; 
+	 @FindBy (xpath = "//*[@class='text-gray-400 focus:text-gray-500 inline-flex w-5 h-5 transition duration-150 ease-in-out focus:outline-none']")
+		public WebElement xButton; 
 	
 	@FindBy (xpath = "//h6[text()=' Sales & Expenses']")
 		public WebElement salesAndExpensesPage; 
@@ -212,6 +212,25 @@ public class CreateCustomerFunctionalityPage {
 	
 	@FindBy (xpath = "//div[@class= 'flex-1 w-0 ml-3 text-left']")
 		public WebElement wholeFlashMessage;
+	
+	@FindBy (xpath = "//div[contains(@class, 'inline-block px-4 pt-5 pb-4 overflow-hidden text-left')]")
+		public WebElement alertMessage;
+	
+	@FindBy (xpath = "//h3[text()='Are you sure?']")
+		public WebElement modalTitle; 
+	
+	@FindBy (xpath = "//p[contains(text(),'You will not be able to recover this customer')]")
+		public WebElement modalMessage; 
+	
+	@FindBy (xpath = "//button[text()='Ok']")
+		public WebElement modalOkButton; 
+	
+	@FindBy (xpath = "//button[text()='Cancel']")
+		public WebElement modalCancelButton; 
+	
+	
+	
+	
 	
 	
 	
