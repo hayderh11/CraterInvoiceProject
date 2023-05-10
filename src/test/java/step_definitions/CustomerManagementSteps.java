@@ -55,7 +55,7 @@ public class CustomerManagementSteps {
 		
 	}
 	
-	@Given("I have clicked on the {string} menu link")
+	//@Given("I have clicked on the {string} menu link")
 	public void i_have_clicked_on_the_menu_link(String customersMenu) {
 		
 		utils.waitUntilElementToBeClickable(common.customersLink);

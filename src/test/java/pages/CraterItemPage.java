@@ -94,11 +94,11 @@ public class CraterItemPage {
 	@FindBy (xpath = "//div[@name='name']")
 	public WebElement filterNameBox;
 	
-	@FindBy (xpath = "//p[text()='Success!']")
+	@FindBy (xpath = "//p[contains(text(), 'Item created successfully')]")
 	public WebElement  flashMessage;
 	
-	@FindBy (xpath = "//path[contains(@fill-rule, 'evenodd']")
-	public WebElement  flashMessageXXX;
+	@FindBy (xpath = "//*[@class='text-gray-400 focus:text-gray-500 inline-flex w-5 h-5 transition duration-150 ease-in-out focus:outline-none']")
+	public WebElement flashMessageXXX;
 	
 	//Test Case 4, Scenario: I am able to filter Item page
 	
@@ -130,7 +130,7 @@ public class CraterItemPage {
 	@FindBy (xpath = "(//td[contains(@class, 'px-6 py-4 text-sm text-gray-500 whitespace-nowrap')])[3]")
 	public WebElement ResultUnitInSEARCH;
 	
-	@FindBy (className = "(//div[contains(@class, 'flex flex-col mt-1')])[3]")
+	@FindBy (xpath = "(//input[contains(@class, 'font-base block w-full sm:text-sm border-gray-200 rounded-md text')])[3]")
 	public WebElement ItemPriceInSEARCH;
 	
 	@FindBy (xpath = "//span[contains(@class, 'block mt-1')]")
@@ -143,5 +143,10 @@ public class CraterItemPage {
 	public WebElement PriceToClose;
 	
 }
+//p[contains(@class, 'text-sm leading-5 font-medium text-gray-900')]
+
+//d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
 
 //text-sm leading-5 font-medium text-gray-900
+
+//div[text()='Price ']//parent::label//following-sibling::div/input

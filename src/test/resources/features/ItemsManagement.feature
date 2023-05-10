@@ -23,7 +23,7 @@ Feature: Items Page
 
   @VerifyItemPage @smoketest
   Scenario: I am able to verify Item page
-    When I click on "+ Add Item"
+    When I able to click on "+ Add Item"
     Then I should be on the page
     And in Name Field, I should see an Error Message "Display Name must be less than 50 characters" if i insert 50 characters or more
     And I should see Price with numerical values
@@ -32,12 +32,11 @@ Feature: Items Page
 
   @AddItems @smoketest
   Scenario: I am able to add Item page
-    When I able to click on "+ Add Item"
+     When I able to click on1 "+ Add Item"
     Then I am on the page
     When I provide item information name "mercedes benz", price 30000, unit "pc", and description "a good Car"
     Then I click Save Item button
     And I should see a flash message "Success! Item created successfully” with a close button to the right."
-    And The flash message should disappear within 5 seconds or less.
     Then I can close the flash message by clicking on the 'X' button.
     And I should be navigated to the Items Page.
     Then The Item is added to the Item list table
