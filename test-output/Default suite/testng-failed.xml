@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="pages.APILoginPage">
+      <class name="API_Test.APILoginPage">
         <methods>
-          <include name="testcase4WrongUsernamePassword"/>
           <include name="setup"/>
+          <include name="inValidToken"/>
+          <include name="testcase1ValidLogin"/>
         </methods>
-      </class> <!-- pages.APILoginPage -->
+      </class> <!-- API_Test.APILoginPage -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

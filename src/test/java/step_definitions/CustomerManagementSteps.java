@@ -156,7 +156,7 @@ public class CustomerManagementSteps {
 
 	}
 	@When("I click on {string}")
-	public void i_click_on(String newCustomer) throws InterruptedException {
+	public void i_click_on_the_(String newCustomer) throws InterruptedException {
 	    
 		utils.waitUntilElementVisible(customerLogin.newCutomerButton);
 		customerLogin.newCutomerButton.click();
@@ -624,8 +624,8 @@ public class CustomerManagementSteps {
 	    utils.actionsClick(customerLogin.threeDotsLinkIcon);
 		
 	}
-	@When("I click on button {string}")
-	public void i_click_on_button(String delete) {
+	@When("I click on {string} button")
+	public void i_click_on_delete_button(String delete) {
 	    
 		utils.waitUntilElementToBeClickable(customerLogin.deleteButtonIcon);
 		customerLogin.deleteButtonIcon.click();
@@ -699,8 +699,10 @@ public class CustomerManagementSteps {
 	@Then("I should be able to close the flash message appearing on the page by clicking on the {string} button")
 	public void i_should_be_able_to_close_the_flash_message_appearing_on_the_page_by_clicking_on_the_button(String xButton) {
 	    
-//		utils.waitUntilElementToBeClickable(customerLogin.xButton);
-//		utils.actionsClick(customerLogin.xButton);
+//		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+//		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='text-gray-400 focus:text-gray-500 inline-flex w-5 h-5 transition duration-150 ease-in-out focus:outline-none']")));
+		utils.waitUntilElementToBeClickable(customerLogin.xButton);
+		utils.actionsClick(customerLogin.xButton);
 		
 	}
 	@Then("I should be directed to the customer table")

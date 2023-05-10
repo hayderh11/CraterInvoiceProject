@@ -159,8 +159,8 @@ public class CreateCustomerFunctionalityPage {
 	@FindBy (xpath = "//p[text()='Customer created successfully']")
 		public WebElement customerCreatedMessage; 
 	
-	// @FindBy (xpath = "//*[@class='text-gray-400 focus:text-gray-500 inline-flex w-5 h-5 transition duration-150 ease-in-out focus:outline-none']")
-	//	public WebElement xButton; 
+	 @FindBy (xpath = "//*[@class='text-gray-400 focus:text-gray-500 inline-flex w-5 h-5 transition duration-150 ease-in-out focus:outline-none']")
+		public WebElement xButton; 
 	
 	@FindBy (xpath = "//h6[text()=' Sales & Expenses']")
 		public WebElement salesAndExpensesPage; 
